@@ -6,17 +6,21 @@ import { GameManager } from "../etc/GameManager";
 import { Inyago } from "../models/Inyago";
 import { useKey } from 'rooks';
 import { Arrow, SPAN } from "../etc/Const";
+import { Point } from "../models/Point";
 
 export default function GameElement() {
     const [inyagos, setInyagos] = useState<Inyago[]>([]);
     const [arrow, setArrow] = useState<Arrow>("");
     const [progress, setProgress] = useState(1.0);
+    const [esa, setEsa] = useState<Point | null>(null);
     const { time, start } = useTimer({
-        interval: 34,
+        interval: 17,
     });
 
     useEffect(() => {
-        setInyagos(GameManager.createInyagos());
+        const _inagos = GameManager.createInyagos();
+        setInyagos(_inagos);
+        setEsa(GameManager.randomEsa(_inagos));
         start();
     }, []);
 
@@ -42,6 +46,7 @@ export default function GameElement() {
     return (
         <FieldElement
             inyagos={inyagos}
+            esa={esa}
         />
     )
 }

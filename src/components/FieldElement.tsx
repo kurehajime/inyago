@@ -1,10 +1,12 @@
 import { CELL_WIDTH, FIELD_SIZE, FIELD_WIDTH } from "../etc/Const";
 import { Inyago } from "../models/Inyago";
 import { Position } from "../models/Position";
+import EsaElement from "./EsaElement";
 import InyagoElement from "./InyagoElement";
 
 type Props = {
     inyagos: Inyago[];
+    esa: Position | null;
 }
 
 export default function FieldElement(props: Props) {
@@ -38,6 +40,13 @@ export default function FieldElement(props: Props) {
                             />
                         )
                     })
+                }
+            </>
+            <>
+                {
+                    props.esa ? <EsaElement
+                        esa={props.esa}
+                    /> : <></>
                 }
             </>
             <>
