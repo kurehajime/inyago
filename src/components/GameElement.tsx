@@ -2,7 +2,6 @@
 import { useTimer } from "use-timer";
 import FieldElement from "./FieldElement";
 import { useEffect, useState } from "react";
-import { GameManager } from "../etc/GameManager";
 import { useKey } from 'rooks';
 import { Arrow, SPAN } from "../etc/Const";
 import { GameState } from "../models/GameState";
@@ -19,15 +18,8 @@ export default function GameElement() {
     }, []);
 
     useEffect(() => {
-        const nextGameState = gameState.clone();
-        if (nextGameState.Inyagos.length === 0) return;
-        nextGameState.tick();
-        nextGameState.Progress += SPAN;
-        if (nextGameState.Progress >= 1) {
-            nextGameState.nextStep();
-            nextGameState.Progress = 0;
-        }
-        setGameState(nextGameState);
+        if (gameState.Inyagos.length === 0) return;
+        setGameState(gameState.tick());
     }, [time]);
 
     useKey(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"], (e) => {
