@@ -50,6 +50,11 @@ export class Utils {
         return blankPoints[index];
     }
 
+    public static hitEsa(inyagos: Inyago[], esa: Point | null): boolean {
+        if (esa === null) return false;
+        return inyagos.some(inyago => inyago.point.x === esa.x && inyago.point.y === esa.y);
+    }
+
     private static innerPoint(): Point[] {
         const points: Point[] = [];
         for (let x = 1; x < FIELD_SIZE - 1; x++) {

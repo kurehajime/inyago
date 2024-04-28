@@ -44,11 +44,16 @@ export class GameState {
 
     private nextStep() {
         const vector = Utils.arrowToVector(this.Arrow);
+        const hitEsa = Utils.hitEsa(this.Inyagos, this.Esa);
         let nextPoint = Utils.nextPoint(this.Inyagos[0].point, vector);
         for (let i = 0; i < this.Inyagos.length; i++) {
             const temp = this.Inyagos[i].point;
             this.Inyagos[i].point = nextPoint;
             nextPoint = temp;
+        }
+        if (hitEsa) {
+            this.Inyagos.push(Inyago.create(nextPoint));
+            this.Esa = Utils.randomEsa(this.Inyagos);
         }
     }
 }
