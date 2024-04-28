@@ -19,12 +19,12 @@ export default function GameElement() {
 
     useEffect(() => {
         if (gameState.Inyagos.length === 0) return;
-        setGameState(gameState.tick());
+        setGameState(gameState.Tick());
     }, [time]);
 
     useKey(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"], (e) => {
         if (gameState.Arrow !== e.key) {
-            const nextGameState = gameState.clone();
+            const nextGameState = gameState.Clone();
             nextGameState.Arrow = e.key as Arrow;
             setGameState(nextGameState);
         }

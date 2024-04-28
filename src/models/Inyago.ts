@@ -11,13 +11,13 @@ export class Inyago {
     constructor(public point: Point, public position: Position) {
     }
 
-    public clone(): Inyago {
+    public Clone(): Inyago {
         const clone = new Inyago(this.point, this.position);
         return clone;
     }
 
-    public move(rateprogress: number) {
-        const to = this.to();
+    public Move(rateprogress: number) {
+        const to = this.To();
         const diffX = to.x - this.position.x;
         const diffY = to.y - this.position.y;
         const step = rateprogress * CELL_WIDTH;
@@ -33,14 +33,14 @@ export class Inyago {
         }
     }
 
-    public vector(): Vector {
+    public Vector(): Vector {
         return {
-            x: Math.sign(this.to().x - this.position.x),
-            y: Math.sign(this.to().y - this.position.y),
+            x: Math.sign(this.To().x - this.position.x),
+            y: Math.sign(this.To().y - this.position.y),
         };
     }
 
-    public to(): Position {
+    public To(): Position {
         return {
             x: this.point.x * CELL_WIDTH,
             y: this.point.y * CELL_WIDTH,

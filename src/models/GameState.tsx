@@ -9,17 +9,24 @@ export class GameState {
     public Arrow: Arrow = "";
     public Progress: number = 1.0;
 
-    public clone(): GameState {
+    public static Init(): GameState {
         const newState = new GameState();
-        newState.Inyagos = this.Inyagos.map((inyago) => inyago.clone());
+        newState.Inyagos = Utils.createInyagos();
+        newState.Esa = Utils.randomEsa(newState.Inyagos);
+        return newState;
+    }
+
+    public Clone(): GameState {
+        const newState = new GameState();
+        newState.Inyagos = this.Inyagos.map((inyago) => inyago.Clone());
         newState.Esa = this.Esa;
         newState.Arrow = this.Arrow;
         newState.Progress = this.Progress;
         return newState;
     }
 
-    public tick(): GameState {
-        const clone = this.clone();
+    public Tick(): GameState {
+        const clone = this.Clone();
         clone.move();
         clone.Progress += SPAN;
         if (clone.Progress >= 1) {
@@ -29,13 +36,13 @@ export class GameState {
         return clone;
     }
 
-    public move() {
+    private move() {
         this.Inyagos.forEach(inyago => {
-            inyago.move(SPAN);
+            inyago.Move(SPAN);
         });
     }
 
-    public nextStep() {
+    private nextStep() {
         const vector = Utils.arrowToVector(this.Arrow);
         let nextPoint = Utils.nextPoint(this.Inyagos[0].point, vector);
         for (let i = 0; i < this.Inyagos.length; i++) {
@@ -43,12 +50,5 @@ export class GameState {
             this.Inyagos[i].point = nextPoint;
             nextPoint = temp;
         }
-    }
-
-    public static Init(): GameState {
-        const newState = new GameState();
-        newState.Inyagos = Utils.createInyagos();
-        newState.Esa = Utils.randomEsa(newState.Inyagos);
-        return newState;
     }
 }
