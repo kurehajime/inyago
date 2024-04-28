@@ -3,50 +3,47 @@ import { useTimer } from "use-timer";
 import FieldElement from "./FieldElement";
 import { useEffect, useState } from "react";
 import { GameManager } from "../etc/GameManager";
-import { Inyago } from "../models/Inyago";
 import { useKey } from 'rooks';
 import { Arrow, SPAN } from "../etc/Const";
-import { Point } from "../models/Point";
+import { GameState } from "../models/GameState";
 
 export default function GameElement() {
-    const [inyagos, setInyagos] = useState<Inyago[]>([]);
-    const [arrow, setArrow] = useState<Arrow>("");
-    const [progress, setProgress] = useState(1.0);
-    const [esa, setEsa] = useState<Point | null>(null);
+    const [gameState, setGameState] = useState<GameState>(new GameState());
     const { time, start } = useTimer({
         interval: 17,
     });
 
     useEffect(() => {
-        const _inagos = GameManager.createInyagos();
-        setInyagos(_inagos);
-        setEsa(GameManager.randomEsa(_inagos));
+        setGameState(GameState.Init());
         start();
     }, []);
 
     useEffect(() => {
-        let nextInyagos = inyagos;
-        if (inyagos.length === 0) return;
-        nextInyagos = GameManager.moveInyagos(nextInyagos);
-        if (progress + SPAN >= 1) {
-            setProgress(0);
-            nextInyagos = GameManager.nextInyagos(nextInyagos, arrow);
-        } else {
-            setProgress(progress + SPAN);
+        const nextGameState = gameState.clone();
+        if (nextGameState.Inyagos.length === 0) return;
+        nextGameState.tick();
+        nextGameState.Progress += SPAN;
+        if (nextGameState.Progress >= 1) {
+            nextGameState.nextStep();
+            nextGameState.Progress = 0;
         }
-        setInyagos(nextInyagos);
+        setGameState(nextGameState);
     }, [time]);
 
     useKey(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"], (e) => {
-        setArrow(e.key as Arrow);
+        if (gameState.Arrow !== e.key) {
+            const nextGameState = gameState.clone();
+            nextGameState.Arrow = e.key as Arrow;
+            setGameState(nextGameState);
+        }
     }, {
         eventTypes: ["keydown"],
     });
 
     return (
         <FieldElement
-            inyagos={inyagos}
-            esa={esa}
+            inyagos={gameState.Inyagos}
+            esa={gameState.Esa}
         />
     )
 }

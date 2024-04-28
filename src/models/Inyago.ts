@@ -16,23 +16,21 @@ export class Inyago {
         return clone;
     }
 
-    public move(rateprogress: number): Inyago {
+    public move(rateprogress: number) {
         const to = this.to();
         const diffX = to.x - this.position.x;
         const diffY = to.y - this.position.y;
         const step = rateprogress * CELL_WIDTH;
-        const clone = this.clone();
         if (Math.abs(diffX) < step) {
-            clone.position.x = to.x;
+            this.position.x = to.x;
         } else {
-            clone.position.x += Math.sign(diffX) * step;
+            this.position.x += Math.sign(diffX) * step;
         }
         if (Math.abs(diffY) < step) {
-            clone.position.y = to.y;
+            this.position.y = to.y;
         } else {
-            clone.position.y += Math.sign(diffY) * step;
+            this.position.y += Math.sign(diffY) * step;
         }
-        return clone;
     }
 
     public vector(): Vector {
