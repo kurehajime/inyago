@@ -1,8 +1,14 @@
 import { CELL_WIDTH, FIELD_SIZE, FIELD_WIDTH } from "../etc/Const";
-import { Tile } from "../models/Tile";
+import { Inyago } from "../models/Inyago";
+import { Position } from "../models/Position";
+import InyagoElement from "./InyagoElement";
 
-export default function FieldElement() {
-    const tiles: Array<Tile> = [];
+type Props = {
+    inyagos: Inyago[];
+}
+
+export default function FieldElement(props: Props) {
+    const tiles: Array<Position> = [];
     const white = "#FFFFFF";
     const black = "#EEEEEE";
     for (let row = 0; row < FIELD_SIZE; row++) {
@@ -10,7 +16,6 @@ export default function FieldElement() {
             tiles.push({
                 x: col * CELL_WIDTH,
                 y: row * CELL_WIDTH,
-                width: CELL_WIDTH
             });
         }
     }
@@ -19,21 +24,31 @@ export default function FieldElement() {
         <svg
             width={FIELD_WIDTH}
             height={FIELD_WIDTH}
-        >
-            {
-                tiles.map((tile, index) => {
-                    return (
-                        <rect
-                            key={index}
-                            x={tile.x}
-                            y={tile.y}
-                            width={tile.width}
-                            height={tile.width}
-                            fill={(index + 1) % 2 === 0 ? black : white}
-                        />
-                    )
-                })
-            }
+        ><>
+                {
+                    tiles.map((tile, index) => {
+                        return (
+                            <rect
+                                key={index}
+                                x={tile.x}
+                                y={tile.y}
+                                width={CELL_WIDTH}
+                                height={CELL_WIDTH}
+                                fill={(index + 1) % 2 === 0 ? black : white}
+                            />
+                        )
+                    })
+                }
+            </>
+            <>
+                {
+                    props.inyagos.map((inyago, index) => {
+                        return (
+                            <InyagoElement key={index} inyago={inyago} />
+                        )
+                    })
+                }
+            </>
         </svg>
     )
 }
