@@ -6,9 +6,10 @@ import InyagoElement from "./InyagoElement";
 import './FieldElement.css'
 import { Point } from "../models/Point";
 import HoleElement from "./HoleElement";
+import { Esa } from "../models/Esa";
 type Props = {
     inyagos: Inyago[];
-    esas: Point[];
+    esas: Esa[];
     state: State;
     time: number;
     holes: Point[];

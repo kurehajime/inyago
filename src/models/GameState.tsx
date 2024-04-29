@@ -1,11 +1,12 @@
 import { Arrow, SPAN, State } from "../etc/Const";
 import { Utils } from "../etc/Utils";
+import { Esa } from "./Esa";
 import { Inyago } from "./Inyago";
 import { Point } from "./Point";
 
 export class GameState {
     public Inyagos: Inyago[] = [];
-    public Esas: Point[] = [];
+    public Esas: Esa[] = [];
     public Arrow: Arrow = "";
     public Progress: number = 1.0;
     public State: State = "start";
@@ -64,6 +65,10 @@ export class GameState {
         }
         if (hitEsa) {
             this.Inyagos.push(Inyago.create(nextPoint));
+            if (hitEsa === "special") {
+                this.Inyagos.push(Inyago.create(nextPoint));
+                this.Inyagos.push(Inyago.create(nextPoint));
+            }
             this.Holes.push(nextPoint);
             if (this.Holes.length > 10) {
                 this.Holes.shift();

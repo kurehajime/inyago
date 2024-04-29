@@ -1,19 +1,18 @@
 import { CELL_WIDTH } from "../etc/Const";
-import { Point } from "../models/Point";
-
+import { Esa } from "../models/Esa";
 type Props = {
-    esa: Point | null;
+    esa: Esa;
 }
 export default function EsaElement(props: Props) {
     if (props.esa) {
         return (
             <>
                 <rect
-                    x={props.esa.x * CELL_WIDTH}
-                    y={props.esa.y * CELL_WIDTH}
+                    x={props.esa.point.x * CELL_WIDTH}
+                    y={props.esa.point.y * CELL_WIDTH}
                     width={CELL_WIDTH}
                     height={CELL_WIDTH}
-                    fill="green"
+                    fill={props.esa.esaType === "normal" ? "green" : "blue"}
                 />
             </>
         )

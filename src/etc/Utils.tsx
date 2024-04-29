@@ -1,7 +1,8 @@
+import { Esa } from "../models/Esa";
 import { Inyago } from "../models/Inyago";
 import { Point } from "../models/Point";
 import { Vector } from "../models/Vector";
-import { Arrow, FIELD_SIZE } from "./Const";
+import { Arrow, EsaType, FIELD_SIZE } from "./Const";
 
 export class Utils {
     public static isGameOver(inyagos: Inyago[], holes: Point[]): boolean {
@@ -44,35 +45,47 @@ export class Utils {
         }
     }
 
-    public static randomEsas(inyagos: Inyago[], holes: Point[]): Point[] {
-        const esas: Point[] = [];
+    public static randomEsas(inyagos: Inyago[], holes: Point[]): Esa[] {
+        const esas: Esa[] = [];
         for (let i = 0; i < 2; i++) {
             esas.push(Utils.randomEsa(inyagos, holes, esas));
         }
         return esas;
     }
 
-    public static randomEsa(inyagos: Inyago[], holes: Point[], esas: Point[]): Point {
+    public static randomEsa(inyagos: Inyago[], holes: Point[], esas: Esa[]): Esa {
         const innnerPoints = Utils.innerPoint();
-        const notBlankPoints = Utils.notBlankPoint(inyagos);
+        const notBlankPoints = inyagos.map(inyago => inyago.point);
         notBlankPoints.push(...holes);
-        notBlankPoints.push(...esas);
+        notBlankPoints.push(...esas.map(esa => esa.point));
         const blankPoints = innnerPoints.filter(point => {
             return notBlankPoints.every(notBlankPoint => {
                 return notBlankPoint.x !== point.x || notBlankPoint.y !== point.y;
             });
         });
         const index = Math.floor(Math.random() * blankPoints.length);
-        return blankPoints[index];
+        return {
+            point: blankPoints[index],
+            esaType: Utils.isSpecialEsa(blankPoints[index], holes) ? "special" : "normal"
+        };
     }
 
-    public static hitEsa(inyagos: Inyago[], esas: Point[]): boolean {
+    public static hitEsa(inyagos: Inyago[], esas: Esa[]): EsaType | null {
+        const head = inyagos[0].point;
         for (let i = 0; i < esas.length; i++) {
-            if (inyagos.some(inyago => inyago.point.x === esas[i].x && inyago.point.y === esas[i].y)) {
-                return true;
+            if (head.x === esas[i].point.x && head.y === esas[i].point.y) {
+                return esas[i].esaType;
             }
         }
-        return false;
+        return null;
+    }
+
+    private static isSpecialEsa(esaPoint: Point, holes: Point[]): boolean {
+        return holes.some(hole => Utils.near(esaPoint, hole));
+    }
+
+    private static near(point1: Point, point2: Point): boolean {
+        return Math.abs(point1.x - point2.x) + Math.abs(point1.y - point2.y) <= 1;
     }
 
     private static innerPoint(): Point[] {
@@ -83,10 +96,6 @@ export class Utils {
             }
         }
         return points;
-    }
-
-    private static notBlankPoint(inyagos: Inyago[]): Point[] {
-        return inyagos.map(inyago => inyago.point);
     }
 
     private static outOfField(inyagos: Inyago[]): boolean {
