@@ -18,6 +18,14 @@ export default function InyagoElement(props: Props) {
     let image = down1;
     const no = ((props.no + Math.round(props.time / 5)) % 2);
     const vector = props.inyago.Vector();
+    let x = props.inyago.position.x;
+    let y = props.inyago.position.y;
+    if (vector.x === 0 && no === 1) {
+        x += 2;
+    }
+    if (vector.y === 0 && no === 1) {
+        y += 2;
+    }
     if (vector.x === 0 && vector.y === -1) {
         image = no === 0 ? up1 : up2;
     }
@@ -33,8 +41,8 @@ export default function InyagoElement(props: Props) {
 
     return (
         <image
-            x={props.inyago.position.x}
-            y={props.inyago.position.y}
+            x={x}
+            y={y}
             width={CELL_WIDTH}
             height={CELL_WIDTH}
             href={image}
