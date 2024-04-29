@@ -4,7 +4,6 @@ import { Vector } from "../models/Vector";
 import { Arrow, FIELD_SIZE } from "./Const";
 
 export class Utils {
-
     public static isGameOver(inyagos: Inyago[]): boolean {
         return Utils.outOfField(inyagos) || Utils.hitBody(inyagos);
     }
@@ -62,8 +61,8 @@ export class Utils {
 
     private static innerPoint(): Point[] {
         const points: Point[] = [];
-        for (let x = 1; x < FIELD_SIZE - 1; x++) {
-            for (let y = 1; y < FIELD_SIZE - 1; y++) {
+        for (let x = 2; x < FIELD_SIZE - 2; x++) {
+            for (let y = 2; y < FIELD_SIZE - 2; y++) {
                 points.push({ x: x, y: y });
             }
         }
