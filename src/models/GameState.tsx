@@ -9,12 +9,14 @@ export class GameState {
     public Arrow: Arrow = "";
     public Progress: number = 1.0;
     public State: State = "start";
+    public Holes: Point[] = [];
 
     public static Init(): GameState {
         const newState = new GameState();
         newState.Inyagos = Utils.createInyagos();
         newState.Esa = Utils.randomEsa(newState.Inyagos);
         newState.State = "playing";
+        newState.Holes = [];
         return newState;
     }
 
@@ -25,6 +27,7 @@ export class GameState {
         newState.Arrow = this.Arrow;
         newState.Progress = this.Progress;
         newState.State = this.State;
+        newState.Holes = this.Holes;
         return newState;
     }
 
@@ -62,6 +65,7 @@ export class GameState {
         if (hitEsa) {
             this.Inyagos.push(Inyago.create(nextPoint));
             this.Esa = Utils.randomEsa(this.Inyagos);
+            this.Holes.push(nextPoint);
         }
     }
 }

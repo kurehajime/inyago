@@ -4,11 +4,14 @@ import { Position } from "../models/Position";
 import EsaElement from "./EsaElement";
 import InyagoElement from "./InyagoElement";
 import './FieldElement.css'
+import { Point } from "../models/Point";
+import HoleElement from "./HoleElement";
 type Props = {
     inyagos: Inyago[];
     esa: Position | null;
     state: State;
     time: number;
+    holes: Point[];
 }
 
 export default function FieldElement(props: Props) {
@@ -45,6 +48,18 @@ export default function FieldElement(props: Props) {
                                 width={CELL_WIDTH}
                                 height={CELL_WIDTH}
                                 fill={tileColor}
+                            />
+                        )
+                    })
+                }
+            </>
+            <>
+                {
+                    props.holes.map((hole, index) => {
+                        return (
+                            <HoleElement
+                                key={index}
+                                point={hole}
                             />
                         )
                     })

@@ -50,6 +50,7 @@ export default function GameElement() {
             esa={gameState.Esa}
             state={gameState.State}
             time={time}
+            holes={gameState.Holes}
         />
     )
 }
