@@ -1,3 +1,4 @@
+import './InyagoElement.css'
 import { CELL_WIDTH } from "../etc/Const";
 import { Inyago } from "../models/Inyago";
 import down1 from '../assets/down1.png'
