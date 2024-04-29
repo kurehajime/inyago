@@ -1,4 +1,4 @@
-import { Arrow, SPAN } from "../etc/Const";
+import { Arrow, SPAN, State } from "../etc/Const";
 import { Utils } from "../etc/Utils";
 import { Inyago } from "./Inyago";
 import { Point } from "./Point";
@@ -8,11 +8,13 @@ export class GameState {
     public Esa: Point | null = null;
     public Arrow: Arrow = "";
     public Progress: number = 1.0;
+    public State: State = "start";
 
     public static Init(): GameState {
         const newState = new GameState();
         newState.Inyagos = Utils.createInyagos();
         newState.Esa = Utils.randomEsa(newState.Inyagos);
+        newState.State = "playing";
         return newState;
     }
 
@@ -22,6 +24,7 @@ export class GameState {
         newState.Esa = this.Esa;
         newState.Arrow = this.Arrow;
         newState.Progress = this.Progress;
+        newState.State = this.State;
         return newState;
     }
 
@@ -32,6 +35,11 @@ export class GameState {
         if (clone.Progress >= 1) {
             clone.nextStep();
             clone.Progress = 0;
+        }
+        if (clone.Progress === SPAN) {
+            if (Utils.isGameOver(clone.Inyagos)) {
+                clone.State = "gameover";
+            }
         }
         return clone;
     }

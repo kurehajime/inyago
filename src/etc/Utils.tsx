@@ -4,6 +4,11 @@ import { Vector } from "../models/Vector";
 import { Arrow, FIELD_SIZE } from "./Const";
 
 export class Utils {
+
+    public static isGameOver(inyagos: Inyago[]): boolean {
+        return Utils.outOfField(inyagos) || Utils.hitBody(inyagos);
+    }
+
     public static createInyagos(): Inyago[] {
         const inyagos: Inyago[] = [];
         inyagos.push(Inyago.create({ x: Math.floor(FIELD_SIZE / 2), y: Math.floor(FIELD_SIZE / 2) }));
@@ -67,5 +72,15 @@ export class Utils {
 
     private static notBlankPoint(inyagos: Inyago[]): Point[] {
         return inyagos.map(inyago => inyago.point);
+    }
+
+    private static outOfField(inyagos: Inyago[]): boolean {
+        const head = inyagos[0].point;
+        return head.x < 1 || head.y < 1 || head.x >= FIELD_SIZE - 1 || head.y >= FIELD_SIZE - 1;
+    }
+
+    private static hitBody(inyagos: Inyago[]): boolean {
+        const head = inyagos[0].point;
+        return inyagos.slice(1).some(inyago => inyago.point.x === head.x && inyago.point.y === head.y);
     }
 }
