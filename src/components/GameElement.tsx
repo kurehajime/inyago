@@ -47,7 +47,7 @@ export default function GameElement() {
     return (
         <FieldElement
             inyagos={gameState.Inyagos}
-            esa={gameState.Esa}
+            esas={gameState.Esas}
             state={gameState.State}
             time={time}
             holes={gameState.Holes}

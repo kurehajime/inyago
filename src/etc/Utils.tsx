@@ -4,8 +4,10 @@ import { Vector } from "../models/Vector";
 import { Arrow, FIELD_SIZE } from "./Const";
 
 export class Utils {
-    public static isGameOver(inyagos: Inyago[]): boolean {
-        return Utils.outOfField(inyagos) || Utils.hitBody(inyagos);
+    public static isGameOver(inyagos: Inyago[], holes: Point[]): boolean {
+        if (inyagos.length === 0) return false;
+        const head = inyagos[0].point;
+        return Utils.outOfField(inyagos) || Utils.hitBody(inyagos) || holes.some(hole => hole.x === head.x && hole.y === head.y);
     }
 
     public static createInyagos(): Inyago[] {
@@ -42,10 +44,19 @@ export class Utils {
         }
     }
 
-    public static randomEsa(inyagos: Inyago[], holes: Point[]): Point {
+    public static randomEsas(inyagos: Inyago[], holes: Point[]): Point[] {
+        const esas: Point[] = [];
+        for (let i = 0; i < 2; i++) {
+            esas.push(Utils.randomEsa(inyagos, holes, esas));
+        }
+        return esas;
+    }
+
+    public static randomEsa(inyagos: Inyago[], holes: Point[], esas: Point[]): Point {
         const innnerPoints = Utils.innerPoint();
         const notBlankPoints = Utils.notBlankPoint(inyagos);
         notBlankPoints.push(...holes);
+        notBlankPoints.push(...esas);
         const blankPoints = innnerPoints.filter(point => {
             return notBlankPoints.every(notBlankPoint => {
                 return notBlankPoint.x !== point.x || notBlankPoint.y !== point.y;
@@ -55,9 +66,13 @@ export class Utils {
         return blankPoints[index];
     }
 
-    public static hitEsa(inyagos: Inyago[], esa: Point | null): boolean {
-        if (esa === null) return false;
-        return inyagos.some(inyago => inyago.point.x === esa.x && inyago.point.y === esa.y);
+    public static hitEsa(inyagos: Inyago[], esas: Point[]): boolean {
+        for (let i = 0; i < esas.length; i++) {
+            if (inyagos.some(inyago => inyago.point.x === esas[i].x && inyago.point.y === esas[i].y)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static innerPoint(): Point[] {

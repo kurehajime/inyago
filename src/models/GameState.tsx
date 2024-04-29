@@ -5,7 +5,7 @@ import { Point } from "./Point";
 
 export class GameState {
     public Inyagos: Inyago[] = [];
-    public Esa: Point | null = null;
+    public Esas: Point[] = [];
     public Arrow: Arrow = "";
     public Progress: number = 1.0;
     public State: State = "start";
@@ -14,7 +14,7 @@ export class GameState {
     public static Init(): GameState {
         const newState = new GameState();
         newState.Inyagos = Utils.createInyagos();
-        newState.Esa = Utils.randomEsa(newState.Inyagos, []);
+        newState.Esas = Utils.randomEsas(newState.Inyagos, []);
         newState.State = "playing";
         newState.Holes = [];
         return newState;
@@ -23,7 +23,7 @@ export class GameState {
     public Clone(): GameState {
         const newState = new GameState();
         newState.Inyagos = this.Inyagos.map((inyago) => inyago.Clone());
-        newState.Esa = this.Esa;
+        newState.Esas = this.Esas;
         newState.Arrow = this.Arrow;
         newState.Progress = this.Progress;
         newState.State = this.State;
@@ -40,7 +40,7 @@ export class GameState {
             clone.Progress = 0;
         }
         if (clone.Progress === SPAN) {
-            if (Utils.isGameOver(clone.Inyagos)) {
+            if (Utils.isGameOver(clone.Inyagos, clone.Holes)) {
                 clone.State = "gameover";
             }
         }
@@ -55,7 +55,7 @@ export class GameState {
 
     private nextStep() {
         const vector = Utils.arrowToVector(this.Arrow);
-        const hitEsa = Utils.hitEsa(this.Inyagos, this.Esa);
+        const hitEsa = Utils.hitEsa(this.Inyagos, this.Esas);
         let nextPoint = Utils.nextPoint(this.Inyagos[0].point, vector);
         for (let i = 0; i < this.Inyagos.length; i++) {
             const temp = this.Inyagos[i].point;
@@ -68,7 +68,7 @@ export class GameState {
             if (this.Holes.length > 10) {
                 this.Holes.shift();
             }
-            this.Esa = Utils.randomEsa(this.Inyagos, this.Holes);
+            this.Esas = Utils.randomEsas(this.Inyagos, this.Holes);
         }
     }
 }

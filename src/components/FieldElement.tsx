@@ -8,7 +8,7 @@ import { Point } from "../models/Point";
 import HoleElement from "./HoleElement";
 type Props = {
     inyagos: Inyago[];
-    esa: Position | null;
+    esas: Point[];
     state: State;
     time: number;
     holes: Point[];
@@ -67,9 +67,15 @@ export default function FieldElement(props: Props) {
             </>
             <>
                 {
-                    props.esa ? <EsaElement
-                        esa={props.esa}
-                    /> : <></>
+                    props.esas.map((esa, index) => {
+
+                        return (
+                            <EsaElement
+                                key={index}
+                                esa={esa}
+                            />
+                        )
+                    })
                 }
             </>
             <>
