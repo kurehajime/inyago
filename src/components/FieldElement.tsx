@@ -8,6 +8,7 @@ type Props = {
     inyagos: Inyago[];
     esa: Position | null;
     state: State;
+    time: number;
 }
 
 export default function FieldElement(props: Props) {
@@ -60,7 +61,12 @@ export default function FieldElement(props: Props) {
                 {
                     props.inyagos.map((inyago, index) => {
                         return (
-                            <InyagoElement key={index} inyago={inyago} />
+                            <InyagoElement
+                                key={index}
+                                inyago={inyago}
+                                time={props.time}
+                                no={index}
+                            />
                         )
                     })
                 }

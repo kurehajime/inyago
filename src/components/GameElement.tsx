@@ -49,6 +49,7 @@ export default function GameElement() {
             inyagos={gameState.Inyagos}
             esa={gameState.Esa}
             state={gameState.State}
+            time={time}
         />
     )
 }
