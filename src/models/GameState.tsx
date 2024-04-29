@@ -14,7 +14,7 @@ export class GameState {
     public static Init(): GameState {
         const newState = new GameState();
         newState.Inyagos = Utils.createInyagos();
-        newState.Esa = Utils.randomEsa(newState.Inyagos);
+        newState.Esa = Utils.randomEsa(newState.Inyagos, []);
         newState.State = "playing";
         newState.Holes = [];
         return newState;
@@ -64,8 +64,11 @@ export class GameState {
         }
         if (hitEsa) {
             this.Inyagos.push(Inyago.create(nextPoint));
-            this.Esa = Utils.randomEsa(this.Inyagos);
             this.Holes.push(nextPoint);
+            if (this.Holes.length > 10) {
+                this.Holes.shift();
+            }
+            this.Esa = Utils.randomEsa(this.Inyagos, this.Holes);
         }
     }
 }

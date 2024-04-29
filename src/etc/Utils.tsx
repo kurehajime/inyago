@@ -42,9 +42,10 @@ export class Utils {
         }
     }
 
-    public static randomEsa(inyagos: Inyago[]): Point {
+    public static randomEsa(inyagos: Inyago[], holes: Point[]): Point {
         const innnerPoints = Utils.innerPoint();
         const notBlankPoints = Utils.notBlankPoint(inyagos);
+        notBlankPoints.push(...holes);
         const blankPoints = innnerPoints.filter(point => {
             return notBlankPoints.every(notBlankPoint => {
                 return notBlankPoint.x !== point.x || notBlankPoint.y !== point.y;
