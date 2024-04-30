@@ -1,0 +1,17 @@
+.special {
+    animation: huerotator 1s infinite alternate;
+}
+
+@keyframes huerotator {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        filter: hue-rotate(360deg);
+    }
+
+    100% {
+        filter: hue-rotate(0deg);
+    }
+}
