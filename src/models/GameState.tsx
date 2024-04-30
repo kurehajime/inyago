@@ -70,7 +70,7 @@ export class GameState {
                 this.Inyagos.push(Inyago.create(nextPoint));
             }
             this.Holes.push(nextPoint);
-            if (this.Holes.length > 12) {
+            if (this.Holes.length > 11) {
                 this.Holes.shift();
             }
             this.Esas = Utils.randomEsas(this.Inyagos, this.Holes);
