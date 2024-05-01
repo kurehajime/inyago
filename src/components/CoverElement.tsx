@@ -67,7 +67,7 @@ export default function CoverElement(props: Props) {
         }
     },)
 
-    if (props.nextCommand) {
+    if (props.turned) {
         reset(mouseX, mouseY)
     }
 
