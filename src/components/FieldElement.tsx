@@ -7,6 +7,7 @@ import './FieldElement.css'
 import { Point } from "../models/Point";
 import HoleElement from "./HoleElement";
 import { Esa } from "../models/Esa";
+import ScoreElement from "./ScoreElement";
 type Props = {
     inyagos: Inyago[];
     esas: Esa[];
@@ -93,6 +94,7 @@ export default function FieldElement(props: Props) {
                     })
                 }
             </>
+            <ScoreElement score={props.inyagos.length} />
         </svg>
     )
 }
