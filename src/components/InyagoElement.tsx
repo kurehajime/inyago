@@ -18,7 +18,7 @@ type Props = {
 export default function InyagoElement(props: Props) {
     let image = down1;
     const no = ((props.no + Math.round(props.time / 5)) % 2);
-    const vector = props.inyago.Vector();
+    const vector = props.inyago.vector;
     let x = props.inyago.position.x;
     let y = props.inyago.position.y;
     if (vector.x === 0 && no === 1) {
@@ -29,14 +29,11 @@ export default function InyagoElement(props: Props) {
     }
     if (vector.x === 0 && vector.y === -1) {
         image = no === 0 ? up1 : up2;
-    }
-    if (vector.x === 0 && vector.y === 1) {
+    } else if (vector.x === 0 && vector.y === 1) {
         image = no === 0 ? down1 : down2;
-    }
-    if (vector.x === -1 && vector.y === 0) {
+    } else if (vector.x === -1 && vector.y === 0) {
         image = no === 0 ? left1 : left2;
-    }
-    if (vector.x === 1 && vector.y === 0) {
+    } else if (vector.x === 1 && vector.y === 0) {
         image = no === 0 ? right1 : right2;
     }
 

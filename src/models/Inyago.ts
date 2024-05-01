@@ -5,14 +5,14 @@ import { Vector } from "./Vector";
 
 export class Inyago {
     static create(point: Point): Inyago {
-        return new Inyago(point, { x: point.x * CELL_WIDTH, y: point.y * CELL_WIDTH });
+        return new Inyago(point, { x: point.x * CELL_WIDTH, y: point.y * CELL_WIDTH }, { x: 0, y: 0 });
     }
 
-    constructor(public point: Point, public position: Position) {
+    constructor(public point: Point, public position: Position, public vector: Vector) {
     }
 
     public Clone(): Inyago {
-        const clone = new Inyago(this.point, this.position);
+        const clone = new Inyago(this.point, this.position, this.vector);
         return clone;
     }
 
@@ -31,9 +31,13 @@ export class Inyago {
         } else {
             this.position.y += Math.sign(diffY) * step;
         }
+        const vector = this.calcVector();
+        if (vector.x !== 0 || vector.y !== 0) {
+            this.vector = vector;
+        }
     }
 
-    public Vector(): Vector {
+    calcVector(): Vector {
         return {
             x: Math.sign(this.To().x - this.position.x),
             y: Math.sign(this.To().y - this.position.y),

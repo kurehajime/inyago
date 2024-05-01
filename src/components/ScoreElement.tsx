@@ -1,5 +1,5 @@
 import { CELL_WIDTH, FIELD_SIZE } from "../etc/Const";
-import down1 from '../assets/revert.png'
+import revert from '../assets/revert.png'
 import './ScoreElement.css'
 type Props = {
     score: number;
@@ -13,7 +13,7 @@ export default function ScoreElement(props: Props) {
                 y={CELL_WIDTH * 0}
                 width={CELL_WIDTH}
                 height={CELL_WIDTH}
-                href={down1}
+                href={revert}
             />
             <text
                 x={CELL_WIDTH * (FIELD_SIZE - 1)}
