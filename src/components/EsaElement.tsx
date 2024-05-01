@@ -24,7 +24,7 @@ export default function EsaElement(props: Props) {
                         y={props.esa.point.y * CELL_WIDTH + CELL_WIDTH / 1.2}
                         text-anchor="middle"
                         fontWeight={"bold"}
-                        font-size="20"
+                        fontSize="20"
                         fill={"#FFFFFF"}
                     >3</text> : <></>
                 }

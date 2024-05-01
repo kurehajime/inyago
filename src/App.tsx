@@ -4,9 +4,11 @@ import GameElement from './components/GameElement'
 function App() {
 
   return (
-    <>
-      <GameElement />
-    </>
+    <div className='container'>
+      <div className='outbox'>
+        <GameElement />
+      </div>
+    </div>
   )
 }
 

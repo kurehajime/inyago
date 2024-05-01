@@ -8,9 +8,9 @@ export default function ScoreElement(props: Props) {
         <text
             x={CELL_WIDTH * (FIELD_SIZE - 1)}
             y={CELL_WIDTH * 0.9}
-            text-anchor="end"
+            textAnchor="end"
             fontWeight={"bold"}
-            font-size="50"
+            fontSize="50"
             fontFamily="Impact"
             fill={"white"}
         >{props.score}</text>

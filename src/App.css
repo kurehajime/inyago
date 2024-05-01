@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+}
+
+.container {
+    background-color: #F0F0E0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.outbox {
+    width: 750px;
+}
