@@ -30,31 +30,27 @@ export default function FieldElement(props: Props) {
     }
 
     return (
-        <svg
-            width={FIELD_WIDTH}
-            height={FIELD_WIDTH}
-            className={props.state === "gameover" ? "gameover" : ""}
-        ><>
-                {
-                    tiles.map((tile, index) => {
-                        const c = index % FIELD_SIZE;
-                        const r = Math.floor(index / FIELD_SIZE);
-                        const isWall = c === 0 || r === 0 || c === FIELD_SIZE - 1 || r === FIELD_SIZE - 1;
-                        let tileColor = (index + 1) % 2 === 0 ? black : white;
-                        tileColor = isWall ? "#333333" : tileColor;
-                        return (
-                            <rect
-                                key={index}
-                                x={tile.x}
-                                y={tile.y}
-                                width={CELL_WIDTH}
-                                height={CELL_WIDTH}
-                                fill={tileColor}
-                            />
-                        )
-                    })
-                }
-            </>
+        <><>
+            {
+                tiles.map((tile, index) => {
+                    const c = index % FIELD_SIZE;
+                    const r = Math.floor(index / FIELD_SIZE);
+                    const isWall = c === 0 || r === 0 || c === FIELD_SIZE - 1 || r === FIELD_SIZE - 1;
+                    let tileColor = (index + 1) % 2 === 0 ? black : white;
+                    tileColor = isWall ? "#333333" : tileColor;
+                    return (
+                        <rect
+                            key={index}
+                            x={tile.x}
+                            y={tile.y}
+                            width={CELL_WIDTH}
+                            height={CELL_WIDTH}
+                            fill={tileColor}
+                        />
+                    )
+                })
+            }
+        </>
             <>
                 {
                     props.holes.map((hole, index) => {
@@ -95,6 +91,6 @@ export default function FieldElement(props: Props) {
                 }
             </>
             <ScoreElement score={props.inyagos.length} />
-        </svg>
+        </>
     )
 }

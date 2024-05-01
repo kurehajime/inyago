@@ -1,5 +1,5 @@
 import { CELL_WIDTH, FIELD_SIZE } from "../etc/Const";
-import down1 from '../assets/down1.png'
+import down1 from '../assets/revert.png'
 import './ScoreElement.css'
 type Props = {
     score: number;
@@ -25,6 +25,5 @@ export default function ScoreElement(props: Props) {
                 fill={"white"}
             >{(props.score.toString()).padStart(3, "0")}</text>
         </>
-
     )
 }

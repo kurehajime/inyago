@@ -3,8 +3,9 @@ import { useTimer } from "use-timer";
 import FieldElement from "./FieldElement";
 import { useEffect, useState } from "react";
 import { useKey } from 'rooks';
-import { Arrow } from "../etc/Const";
+import { Arrow, FIELD_WIDTH } from "../etc/Const";
 import { GameState } from "../models/GameState";
+import CoverElement from "./CoverElement";
 
 export default function GameElement() {
     const [gameState, setGameState] = useState<GameState>(new GameState());
@@ -53,12 +54,23 @@ export default function GameElement() {
 
 
     return (
-        <FieldElement
-            inyagos={gameState.Inyagos}
-            esas={gameState.Esas}
-            state={gameState.State}
-            time={time}
-            holes={gameState.Holes}
-        />
+        <svg
+            width={FIELD_WIDTH}
+            height={FIELD_WIDTH}
+            className={gameState.State === "gameover" ? "gameover" : ""}
+        >
+            <FieldElement
+                inyagos={gameState.Inyagos}
+                esas={gameState.Esas}
+                state={gameState.State}
+                time={time}
+                holes={gameState.Holes}
+            />
+            <CoverElement touch={function () {
+
+            }}
+                nextCommand={false}
+            />
+        </svg>
     )
 }
