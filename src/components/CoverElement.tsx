@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { FIELD_WIDTH } from "../etc/Const";
 
 type Props = {
-    touch: () => void;
+    touched: () => void;
     turned: boolean;
 }
 export default function CoverElement(props: Props) {
@@ -12,11 +12,11 @@ export default function CoverElement(props: Props) {
     const [mouseStartX, setMouseStartX] = React.useState<number>(0)
     const [mouseStartY, setMouseStartY] = React.useState<number>(0)
 
-    const reset = (x: number, y: number) => {
-        setMouseX(x)
-        setMouseY(y)
-        setMouseStartX(x)
-        setMouseStartY(y)
+    const resetXY = (x: number, y: number) => {
+        if (x !== mouseStartX || y !== mouseStartY) {
+            setMouseStartX(x)
+            setMouseStartY(y)
+        }
     }
 
     const touchStart = (event: Event) => {
@@ -24,7 +24,7 @@ export default function CoverElement(props: Props) {
         const rect = (e.target as SVGSVGElement).getBoundingClientRect()
         const x = (e.clientX - window.pageXOffset - rect.left)
         const y = (e.clientY - window.pageYOffset - rect.top)
-        reset(x, y)
+        resetXY(x, y)
         e.preventDefault()
     }
 
@@ -68,7 +68,7 @@ export default function CoverElement(props: Props) {
     },)
 
     if (props.turned) {
-        reset(mouseX, mouseY)
+        resetXY(mouseX, mouseY)
     }
 
     return (

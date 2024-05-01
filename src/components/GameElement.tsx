@@ -67,7 +67,7 @@ export default function GameElement() {
                 time={time}
                 holes={gameState.Holes}
             />
-            <CoverElement touch={function () {
+            <CoverElement touched={function () {
 
             }}
                 turned={turned}
