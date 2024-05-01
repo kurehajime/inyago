@@ -43,6 +43,14 @@ export default function GameElement() {
     }, {
         eventTypes: ["keydown"],
     });
+    useKey(["Enter", "Space"], () => {
+        if (gameState.State === "gameover") {
+            setGameState(GameState.Init());
+            start();
+        }
+    });
+
+
 
     return (
         <FieldElement
