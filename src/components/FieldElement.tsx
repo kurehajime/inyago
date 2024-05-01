@@ -1,4 +1,4 @@
-import { CELL_WIDTH, FIELD_SIZE, FIELD_WIDTH, State } from "../etc/Const";
+import { CELL_WIDTH, FIELD_SIZE, State } from "../etc/Const";
 import { Inyago } from "../models/Inyago";
 import { Position } from "../models/Position";
 import EsaElement from "./EsaElement";
