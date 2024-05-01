@@ -12,6 +12,7 @@ export default function GameElement() {
     const { time, start } = useTimer({
         interval: 17,
     });
+    const turned = gameState.Arrow !== gameState.PrevArrow;
 
     useEffect(() => {
         setGameState(GameState.Init());
@@ -69,7 +70,7 @@ export default function GameElement() {
             <CoverElement touch={function () {
 
             }}
-                nextCommand={false}
+                turned={turned}
             />
         </svg>
     )

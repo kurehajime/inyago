@@ -3,7 +3,7 @@ import { FIELD_WIDTH } from "../etc/Const";
 
 type Props = {
     touch: () => void;
-    nextCommand: boolean;
+    turned: boolean;
 }
 export default function CoverElement(props: Props) {
     const ref = React.useRef<SVGRectElement>(null)

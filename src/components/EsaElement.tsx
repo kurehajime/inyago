@@ -22,7 +22,7 @@ export default function EsaElement(props: Props) {
                     props.esa.esaType === "special" ? <text
                         x={props.esa.point.x * CELL_WIDTH + CELL_WIDTH / 2}
                         y={props.esa.point.y * CELL_WIDTH + CELL_WIDTH / 1.2}
-                        text-anchor="middle"
+                        textAnchor="middle"
                         fontWeight={"bold"}
                         fontSize="20"
                         fill={"#FFFFFF"}

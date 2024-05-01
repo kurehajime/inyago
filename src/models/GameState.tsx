@@ -8,6 +8,7 @@ export class GameState {
     public Inyagos: Inyago[] = [];
     public Esas: Esa[] = [];
     public Arrow: Arrow = "";
+    public PrevArrow: Arrow = "";
     public Progress: number = 1.0;
     public State: State = "start";
     public Holes: Point[] = [];
@@ -26,6 +27,7 @@ export class GameState {
         newState.Inyagos = this.Inyagos.map((inyago) => inyago.Clone());
         newState.Esas = this.Esas;
         newState.Arrow = this.Arrow;
+        newState.PrevArrow = this.PrevArrow;
         newState.Progress = this.Progress;
         newState.State = this.State;
         newState.Holes = this.Holes;
@@ -45,6 +47,7 @@ export class GameState {
                 clone.State = "gameover";
             }
         }
+        clone.PrevArrow = clone.Arrow;
         return clone;
     }
 
