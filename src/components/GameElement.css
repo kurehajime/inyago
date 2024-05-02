@@ -1,3 +1,7 @@
 .gameover {
     filter: invert();
 }
+
+svg {
+    touch-action: none;
+}

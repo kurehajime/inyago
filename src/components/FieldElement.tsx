@@ -3,7 +3,6 @@ import { Inyago } from "../models/Inyago";
 import { Position } from "../models/Position";
 import EsaElement from "./EsaElement";
 import InyagoElement from "./InyagoElement";
-import './FieldElement.css'
 import { Point } from "../models/Point";
 import HoleElement from "./HoleElement";
 import { Esa } from "../models/Esa";

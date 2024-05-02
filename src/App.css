@@ -2,6 +2,10 @@ body {
     font-family: sans-serif;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .container {
     background-color: #F0F0E0;
     width: 100vw;

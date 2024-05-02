@@ -6,6 +6,7 @@ import { useKey } from 'rooks';
 import { Arrow, FIELD_WIDTH } from "../etc/Const";
 import { GameState } from "../models/GameState";
 import CoverElement from "./CoverElement";
+import './GameElement.css'
 
 export default function GameElement() {
     const [gameState, setGameState] = useState<GameState>(new GameState());
@@ -42,6 +43,7 @@ export default function GameElement() {
             nextGameState.Arrow = e.key as Arrow;
             setGameState(nextGameState);
         }
+        e.preventDefault();
     }, {
         eventTypes: ["keydown"],
     });
