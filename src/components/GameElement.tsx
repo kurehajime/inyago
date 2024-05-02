@@ -58,8 +58,7 @@ export default function GameElement() {
 
     return (
         <svg
-            width={FIELD_WIDTH}
-            height={FIELD_WIDTH}
+            viewBox="0 0 750 750"
             className={gameState.State === "gameover" ? "gameover" : ""}
         >
             <FieldElement
