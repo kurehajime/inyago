@@ -1,0 +1,13 @@
+.result_text {
+    filter: drop-shadow(0 0 15px white);
+}
+
+@keyframes typinganime {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}

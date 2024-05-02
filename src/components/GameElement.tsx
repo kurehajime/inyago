@@ -7,6 +7,7 @@ import { Arrow } from "../etc/Const";
 import { GameState } from "../models/GameState";
 import CoverElement from "./CoverElement";
 import './GameElement.css'
+import ResultElement from "./ResultElement";
 
 export default function GameElement() {
     const [gameState, setGameState] = useState<GameState>(new GameState());
@@ -21,9 +22,19 @@ export default function GameElement() {
     }, []);
 
     useEffect(() => {
+        if (gameState.State === "gameover") {
+            setTimeout(() => {
+                setGameState(gameState.showResult());
+            }, 700);
+        }
+    }, [gameState.State]);
+
+    useEffect(() => {
         if (gameState.Inyagos.length === 0) return;
         if (gameState.State === "gameover") return;
-        setGameState(gameState.Tick());
+        if (gameState.State === "playing") {
+            setGameState(gameState.Tick());
+        }
     }, [time]);
 
     useKey(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"], (e) => {
@@ -48,7 +59,7 @@ export default function GameElement() {
         eventTypes: ["keydown"],
     });
     useKey(["Enter", "Space"], () => {
-        if (gameState.State === "gameover") {
+        if (gameState.State === "result") {
             setGameState(GameState.Init());
             start();
         }
@@ -59,7 +70,7 @@ export default function GameElement() {
     return (
         <svg
             viewBox="0 0 750 750"
-            className={gameState.State === "gameover" ? "gameover" : ""}
+            className={gameState.State}
         >
             <FieldElement
                 inyagos={gameState.Inyagos}
@@ -68,6 +79,12 @@ export default function GameElement() {
                 time={time}
                 holes={gameState.Holes}
             />
+            {
+                gameState.State === "result" &&
+                <ResultElement
+                    score={gameState.Inyagos.length}
+                />
+            }
             <CoverElement
                 touched={function (arrow: Arrow) {
                     const nextGameState = gameState.Clone();
@@ -75,8 +92,10 @@ export default function GameElement() {
                     setGameState(nextGameState);
                 }}
                 gameStart={function () {
-                    setGameState(GameState.Init());
-                    start();
+                    if (gameState.State === "result") {
+                        setGameState(GameState.Init());
+                        start();
+                    }
                 }}
                 turned={turned}
                 arrow={gameState.Arrow}

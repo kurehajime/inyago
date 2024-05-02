@@ -1,4 +1,4 @@
-.gameover {
+.gameover, .result {
     filter: invert();
 }
 

@@ -15,6 +15,8 @@ export default function CoverElement(props: Props) {
     const [mouseStartX, setMouseStartX] = React.useState<number>(0)
     const [mouseStartY, setMouseStartY] = React.useState<number>(0)
     const [touched, setTouched] = React.useState<boolean>(false)
+    const [downTime, setDownTime] = React.useState<number>(0)
+
 
     const resetXY = (x: number, y: number) => {
         if (x !== mouseStartX || y !== mouseStartY) {
@@ -28,20 +30,21 @@ export default function CoverElement(props: Props) {
         const rect = (e.target as SVGSVGElement).getBoundingClientRect()
         const x = (e.clientX - window.pageXOffset - rect.left)
         const y = (e.clientY - window.pageYOffset - rect.top)
-        if (props.state === "gameover") {
-            props.gameStart()
-            return;
-        }
         resetXY(x, y)
         setMouseX(x)
         setMouseY(y)
         setTouched(true)
+        setDownTime(Date.now())
         e.preventDefault()
     }
 
     const touchEnd = (event: Event) => {
         const e = event as PointerEvent
         setTouched(false)
+        if (Date.now() - downTime < 500) {
+            props.gameStart()
+            return;
+        }
         e.preventDefault()
     }
 

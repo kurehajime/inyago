@@ -51,6 +51,12 @@ export class GameState {
         return clone;
     }
 
+    public showResult(): GameState {
+        const clone = this.Clone();
+        clone.State = "result";
+        return clone;
+    }
+
     private move() {
         this.Inyagos.forEach(inyago => {
             inyago.Move(SPAN);
