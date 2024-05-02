@@ -67,10 +67,19 @@ export default function GameElement() {
                 time={time}
                 holes={gameState.Holes}
             />
-            <CoverElement touched={function () {
-
-            }}
+            <CoverElement
+                touched={function (arrow: Arrow) {
+                    const nextGameState = gameState.Clone();
+                    nextGameState.Arrow = arrow;
+                    setGameState(nextGameState);
+                }}
+                gameStart={function () {
+                    setGameState(GameState.Init());
+                    start();
+                }}
                 turned={turned}
+                arrow={gameState.Arrow}
+                state={gameState.State}
             />
         </svg>
     )
