@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Arrow, ButtonType, CELL_WIDTH, FIELD_SIZE, FIELD_WIDTH, State } from "../etc/Const";
+import { Arrow, ButtonType, CELL_WIDTH, FIELD_WIDTH, State } from "../etc/Const";
 
 type Props = {
     touched: (arrow: Arrow) => void;
