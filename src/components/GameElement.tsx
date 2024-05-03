@@ -4,7 +4,7 @@ import { useTimer } from "use-timer";
 import FieldElement from "./FieldElement";
 import { useEffect, useState } from "react";
 import { useKey } from 'rooks';
-import { Arrow, ButtonType, FIELD_SIZE } from "../etc/Const";
+import { Arrow, ButtonType } from "../etc/Const";
 import { GameState } from "../models/GameState";
 import CoverElement from "./CoverElement";
 import './GameElement.css'
