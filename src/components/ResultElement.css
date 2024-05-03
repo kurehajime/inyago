@@ -1,3 +1,18 @@
 .result_text {
-    filter: drop-shadow(0 0 15px white);
+    animation: opa 3s infinite alternate;
+    filter: drop-shadow(0 0 15px rgb(0, 0, 0, 0.3));
+}
+
+@keyframes opa {
+    0% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
 }

@@ -1,0 +1,17 @@
+.selected {
+    animation: huerotator 0.5s infinite alternate;
+}
+
+@keyframes huerotator {
+    0% {
+        filter: contrast(100%);
+    }
+
+    50% {
+        filter: contrast(70%);
+    }
+
+    100% {
+        filter: contrast(100%);
+    }
+}

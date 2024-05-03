@@ -12,6 +12,7 @@ export class GameState {
     public Progress: number = 1.0;
     public State: State = "start";
     public Holes: Point[] = [];
+    public Level: number = 1;
 
     public static Init(): GameState {
         const newState = new GameState();
@@ -31,6 +32,7 @@ export class GameState {
         newState.Progress = this.Progress;
         newState.State = this.State;
         newState.Holes = this.Holes;
+        newState.Level = this.Level;
         return newState;
     }
 
@@ -51,9 +53,10 @@ export class GameState {
         return clone;
     }
 
-    public play(): GameState {
+    public play(level: number): GameState {
         const clone = this.Clone();
         clone.State = "playing";
+        clone.Level = level;
         return clone;
     }
 
@@ -61,6 +64,16 @@ export class GameState {
         const clone = this.Clone();
         clone.State = "result";
         return clone;
+    }
+
+    public clear(): boolean {
+        switch (this.Level) {
+            case 1:
+                return this.Inyagos.length >= 3;
+            case 2:
+                return this.Inyagos.length >= 50;
+        }
+        return false;
     }
 
     private move() {
@@ -83,6 +96,10 @@ export class GameState {
             if (hitEsa === "special") {
                 this.Inyagos.push(Inyago.create(nextPoint));
                 this.Inyagos.push(Inyago.create(nextPoint));
+            }
+            if (this.clear()) {
+                this.State = "gameover";
+                return;
             }
             this.Holes.push(nextPoint);
             if (this.Holes.length > 11) {

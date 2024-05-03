@@ -3,7 +3,27 @@ import title from '../assets/title.png'
 import level1 from '../assets/level1.png'
 import level2 from '../assets/level2.png'
 import level3 from '../assets/level3.png'
-export default function TitleElement() {
+import './TitleElement.css'
+type Props = {
+    selectLevel: number;
+}
+export default function TitleElement(props: Props) {
+    let selectedX = 0
+    let color = "white"
+    switch (props.selectLevel) {
+        case 1:
+            selectedX = CELL_WIDTH * 2
+            color = "#f9e230"
+            break;
+        case 2:
+            selectedX = CELL_WIDTH * 6
+            color = "#61d838"
+            break;
+        case 3:
+            selectedX = CELL_WIDTH * 10
+            color = "#00a1fe"
+            break;
+    }
     return (
         <>
             <image
@@ -13,6 +33,14 @@ export default function TitleElement() {
                 height={CELL_WIDTH * 5}
                 href={title}
             />
+            <rect
+                className="selected"
+                x={selectedX - 5}
+                y={CELL_WIDTH * 9 - 5}
+                width={CELL_WIDTH * 3 + 10}
+                height={CELL_WIDTH * 3 + 10}
+                fill={color}
+                href={level1}></rect>
             <image
                 x={CELL_WIDTH * 2}
                 y={CELL_WIDTH * 9}

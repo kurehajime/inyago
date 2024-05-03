@@ -3,7 +3,7 @@ import { Arrow, ButtonType, CELL_WIDTH, FIELD_WIDTH, State } from "../etc/Const"
 
 type Props = {
     touched: (arrow: Arrow) => void;
-    gameStart: () => void;
+    gameStart: (buttonType: ButtonType) => void;
     turned: boolean;
     arrow: Arrow;
     state: State;
@@ -42,7 +42,8 @@ export default function CoverElement(props: Props) {
         const e = event as PointerEvent
         setTouched(false)
         if (Date.now() - downTime < 500) {
-            props.gameStart()
+            const buttonType = hitTest(mouseX, mouseY)
+            props.gameStart(buttonType)
             return;
         }
         e.preventDefault()
@@ -98,7 +99,7 @@ export default function CoverElement(props: Props) {
         const buttonHeight = CELL_WIDTH * 3
         const buttonY = CELL_WIDTH * 9
         const buttonX1 = CELL_WIDTH * 2
-        const buttonX2 = CELL_WIDTH * 3
+        const buttonX2 = CELL_WIDTH * 6
         const buttonX3 = CELL_WIDTH * 10
 
         if (buttonY <= y && y <= buttonY + buttonHeight) {
