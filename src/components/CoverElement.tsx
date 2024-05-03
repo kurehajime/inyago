@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Arrow, CELL_WIDTH, FIELD_WIDTH, State } from "../etc/Const";
+import { Arrow, ButtonType, CELL_WIDTH, FIELD_WIDTH, State } from "../etc/Const";
 
 type Props = {
     touched: (arrow: Arrow) => void;
@@ -91,6 +91,28 @@ export default function CoverElement(props: Props) {
         }
         resetXY(x, y)
         props.touched(arrow as Arrow)
+    }
+
+    const hitTest = (x: number, y: number): ButtonType => {
+        const buttonWidth = CELL_WIDTH * 3
+        const buttonHeight = CELL_WIDTH * 3
+        const buttonY = CELL_WIDTH * 9
+        const buttonX1 = CELL_WIDTH * 2
+        const buttonX2 = CELL_WIDTH * 3
+        const buttonX3 = CELL_WIDTH * 10
+
+        if (buttonY <= y && y <= buttonY + buttonHeight) {
+            if (buttonX1 <= x && x <= buttonX1 + buttonWidth) {
+                return "1"
+            }
+            if (buttonX2 <= x && x <= buttonX2 + buttonWidth) {
+                return "2"
+            }
+            if (buttonX3 <= x && x <= buttonX3 + buttonWidth) {
+                return "3"
+            }
+        }
+        return "Other"
     }
 
     useEffect(() => {

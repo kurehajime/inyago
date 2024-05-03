@@ -8,6 +8,7 @@ import { GameState } from "../models/GameState";
 import CoverElement from "./CoverElement";
 import './GameElement.css'
 import ResultElement from "./ResultElement";
+import TitleElement from "./TitleElement";
 
 export default function GameElement() {
     const [gameState, setGameState] = useState<GameState>(new GameState());
@@ -15,6 +16,11 @@ export default function GameElement() {
         interval: 17,
     });
     const turned = gameState.Arrow !== gameState.PrevArrow;
+
+    const gameStart = () => {
+        setGameState(GameState.Init());
+        start();
+    }
 
     useEffect(() => {
         setGameState(GameState.Init());
@@ -60,12 +66,12 @@ export default function GameElement() {
     });
     useKey(["Enter", "Space"], () => {
         if (gameState.State === "result") {
-            setGameState(GameState.Init());
-            start();
+            gameStart();
+        }
+        if (gameState.State === "start") {
+            setGameState(gameState.play());
         }
     });
-
-
 
     return (
         <svg
@@ -85,6 +91,11 @@ export default function GameElement() {
                     score={gameState.Inyagos.length}
                 />
             }
+            {
+                gameState.State === "start" &&
+                <TitleElement
+                />
+            }
             <CoverElement
                 touched={function (arrow: Arrow) {
                     const nextGameState = gameState.Clone();
@@ -93,8 +104,7 @@ export default function GameElement() {
                 }}
                 gameStart={function () {
                     if (gameState.State === "result") {
-                        setGameState(GameState.Init());
-                        start();
+                        gameStart();
                     }
                 }}
                 turned={turned}

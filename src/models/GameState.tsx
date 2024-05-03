@@ -17,7 +17,7 @@ export class GameState {
         const newState = new GameState();
         newState.Inyagos = Utils.createInyagos();
         newState.Esas = Utils.randomEsas(newState.Inyagos, []);
-        newState.State = "playing";
+        newState.State = "start";
         newState.Holes = [];
         return newState;
     }
@@ -48,6 +48,12 @@ export class GameState {
             }
         }
         clone.PrevArrow = clone.Arrow;
+        return clone;
+    }
+
+    public play(): GameState {
+        const clone = this.Clone();
+        clone.State = "playing";
         return clone;
     }
 

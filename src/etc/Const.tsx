@@ -5,3 +5,4 @@ export const SPAN = 0.1;
 export type Arrow = "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "";
 export type State = "start" | "playing" | "gameover" | "result";
 export type EsaType = "normal" | "special";
+export type ButtonType = "1" | "2" | "3" | "Other";
