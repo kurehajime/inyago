@@ -13,12 +13,14 @@ type Props = {
     state: State;
     time: number;
     holes: Point[];
+    level: number;
 }
 
 export default function FieldElement(props: Props) {
     const tiles: Array<Position> = [];
     const white = "#FFFFFF";
     const black = "#EEEEEE";
+    let mission = "";
     for (let row = 0; row < FIELD_SIZE; row++) {
         for (let col = 0; col < FIELD_SIZE; col++) {
             tiles.push({
@@ -26,6 +28,22 @@ export default function FieldElement(props: Props) {
                 y: row * CELL_WIDTH,
             });
         }
+    }
+
+    const count = props.inyagos.length;
+    switch (props.level) {
+        case 1:
+            if (count < 30) {
+                mission = `あと${30 - count}匹`;
+            }
+            break;
+        case 2:
+            if (count < 50) {
+                mission = `あと${50 - count}匹`;
+            }
+            break;
+        default:
+            break;
     }
 
     return (
@@ -89,6 +107,17 @@ export default function FieldElement(props: Props) {
                     })
                 }
             </>
+            {
+                props.state !== "start" ? <text
+                    x={CELL_WIDTH * 1}
+                    y={CELL_WIDTH * 0.9}
+                    textAnchor="start"
+                    fontWeight={"bold"}
+                    fontSize="50"
+                    fontFamily="Impact"
+                    fill={"white"}
+                >{mission}</text> : null
+            }
             <ScoreElement score={props.inyagos.length} />
         </>
     )

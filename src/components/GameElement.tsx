@@ -128,6 +128,7 @@ export default function GameElement() {
                 state={gameState.State}
                 time={time}
                 holes={gameState.Holes}
+                level={gameState.Level}
             />
             {
                 gameState.State === "result" &&
