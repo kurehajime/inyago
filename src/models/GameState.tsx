@@ -69,7 +69,7 @@ export class GameState {
     public clear(): boolean {
         switch (this.Level) {
             case 1:
-                return this.Inyagos.length >= 3;
+                return this.Inyagos.length >= 30;
             case 2:
                 return this.Inyagos.length >= 50;
         }

@@ -150,7 +150,7 @@ export default function GameElement() {
                     setGameState(nextGameState);
                 }}
                 gameStart={function (buttonType: ButtonType) {
-                    if (gameState.State === "result") {
+                    if (gameState.State === "result" && buttonType === "OK") {
                         gameStart();
                     }
                     if (gameState.State === "start") {
@@ -172,6 +172,17 @@ export default function GameElement() {
                 turned={turned}
                 arrow={gameState.Arrow}
                 state={gameState.State}
+                hover={(buttonType: ButtonType) => {
+                    if (buttonType === "1") {
+                        setSelectLevel(1)
+                    }
+                    if (buttonType === "2") {
+                        setSelectLevel(2)
+                    }
+                    if (buttonType === "3") {
+                        setSelectLevel(3)
+                    }
+                }}
             />
         </svg>
     )

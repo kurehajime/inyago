@@ -39,8 +39,7 @@ export default function TitleElement(props: Props) {
                 y={CELL_WIDTH * 9 - 5}
                 width={CELL_WIDTH * 3 + 10}
                 height={CELL_WIDTH * 3 + 10}
-                fill={color}
-                href={level1}></rect>
+                fill={color}></rect>
             <image
                 x={CELL_WIDTH * 2}
                 y={CELL_WIDTH * 9}

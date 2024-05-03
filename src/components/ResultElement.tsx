@@ -13,16 +13,16 @@ export default function ResultElement(props: Props) {
         color = "url(#rainbow)"
     }
     if (props.level === 3) {
-        if (props.score > 100) {
+        if (props.score >= 100) {
             message = "AWESOME!"
             color = "url(#rainbow)"
-        } else if (props.score > 75) {
+        } else if (props.score >= 75) {
             message = "EXCELLENT!"
             color = "url(#rainbow)"
-        } else if (props.score > 50) {
+        } else if (props.score >= 50) {
             message = "GREAT!"
             color = "url(#rainbow)"
-        } else if (props.score > 30) {
+        } else if (props.score >= 30) {
             message = "NICE!"
             color = "url(#rainbow)"
         }
@@ -44,7 +44,7 @@ export default function ResultElement(props: Props) {
             <text
                 className="result_text"
                 x={CELL_WIDTH * (FIELD_SIZE / 2)}
-                y={CELL_WIDTH * 6}
+                y={CELL_WIDTH * 5}
                 textAnchor="middle"
                 fontWeight={"bold"}
                 fontSize="100"
@@ -55,7 +55,7 @@ export default function ResultElement(props: Props) {
             <text
                 className="result_text"
                 x={CELL_WIDTH * (FIELD_SIZE / 2)}
-                y={CELL_WIDTH * 10}
+                y={CELL_WIDTH * 9}
                 textAnchor="middle"
                 fontWeight={"bold"}
                 fontSize="200"
@@ -63,6 +63,26 @@ export default function ResultElement(props: Props) {
                 fill={color}
                 opacity={0.8}
             >{(props.score.toString()).padStart(3, "0")}</text>
+
+            <rect
+                x={CELL_WIDTH * 4}
+                y={CELL_WIDTH * 10}
+                width={CELL_WIDTH * 7}
+                height={CELL_WIDTH * 2}
+                fill={"white"}
+                stroke={color}
+                strokeWidth={5}
+                opacity={0.9}
+            ></rect>
+            <text
+                x={CELL_WIDTH * (FIELD_SIZE / 2)}
+                y={CELL_WIDTH * 12 - 20}
+                textAnchor="middle"
+                fontWeight={"bold"}
+                fontSize="80"
+                fontFamily="Impact"
+                fill={color}
+            >{"OK"}</text >
         </>
     )
 }

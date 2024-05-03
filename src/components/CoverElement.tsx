@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Arrow, ButtonType, CELL_WIDTH, FIELD_WIDTH, State } from "../etc/Const";
+import { Arrow, ButtonType, CELL_WIDTH, FIELD_SIZE, FIELD_WIDTH, State } from "../etc/Const";
 
 type Props = {
     touched: (arrow: Arrow) => void;
     gameStart: (buttonType: ButtonType) => void;
+    hover: (buttonType: ButtonType) => void;
     turned: boolean;
     arrow: Arrow;
     state: State;
@@ -59,6 +60,10 @@ export default function CoverElement(props: Props) {
         if (touched) {
             check(x, y)
         }
+        if (props.state === "start") {
+            const buttonType = hitTest(x, y)
+            props.hover(buttonType)
+        }
     }
 
     const check = (x: number, y: number) => {
@@ -102,17 +107,32 @@ export default function CoverElement(props: Props) {
         const buttonX2 = CELL_WIDTH * 6
         const buttonX3 = CELL_WIDTH * 10
 
-        if (buttonY <= y && y <= buttonY + buttonHeight) {
-            if (buttonX1 <= x && x <= buttonX1 + buttonWidth) {
-                return "1"
-            }
-            if (buttonX2 <= x && x <= buttonX2 + buttonWidth) {
-                return "2"
-            }
-            if (buttonX3 <= x && x <= buttonX3 + buttonWidth) {
-                return "3"
+        const okX = CELL_WIDTH * 4
+        const okY = CELL_WIDTH * 10
+        const okWidth = CELL_WIDTH * 7
+        const okHeight = CELL_WIDTH * 2
+
+        if (props.state === "start") {
+            if (buttonY <= y && y <= buttonY + buttonHeight) {
+                if (buttonX1 <= x && x <= buttonX1 + buttonWidth) {
+                    return "1"
+                }
+                if (buttonX2 <= x && x <= buttonX2 + buttonWidth) {
+                    return "2"
+                }
+                if (buttonX3 <= x && x <= buttonX3 + buttonWidth) {
+                    return "3"
+                }
             }
         }
+        if (props.state === "result") {
+            if (okY <= y && y <= okY + okHeight) {
+                if (okX <= x && x <= okX + okWidth) {
+                    return "OK"
+                }
+            }
+        }
+
         return "Other"
     }
 
