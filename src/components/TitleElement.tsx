@@ -27,6 +27,7 @@ export default function TitleElement(props: Props) {
     return (
         <>
             <image
+                className="title"
                 x={CELL_WIDTH * 4}
                 y={CELL_WIDTH * 2}
                 width={CELL_WIDTH * 7}
