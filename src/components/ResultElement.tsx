@@ -6,24 +6,24 @@ type Props = {
     level: number;
 }
 export default function ResultElement(props: Props) {
-    let message = "GAME OVER"
+    let message = "残念"
     let color = "black"
     if (props.clear) {
-        message = "CLEAR!"
+        message = "合格"
         color = "url(#rainbow)"
     }
     if (props.level === 3) {
         if (props.score >= 100) {
-            message = "AWESOME!"
+            message = "神"
             color = "url(#rainbow)"
         } else if (props.score >= 75) {
-            message = "EXCELLENT!"
+            message = "名人"
             color = "url(#rainbow)"
         } else if (props.score >= 50) {
-            message = "GREAT!"
+            message = "凄腕"
             color = "url(#rainbow)"
         } else if (props.score >= 30) {
-            message = "NICE!"
+            message = "見事"
             color = "url(#rainbow)"
         }
     }
