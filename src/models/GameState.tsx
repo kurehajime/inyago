@@ -9,7 +9,7 @@ export class GameState {
     public Esas: Esa[] = [];
     public Arrow: Arrow = "";
     public PrevArrow: Arrow = "";
-    public Progress: number = 1.0;
+    public Progress: number = 0.0;
     public State: State = "start";
     public Holes: Point[] = [];
     public Level: number = 1;
@@ -88,7 +88,7 @@ export class GameState {
         let nextPoint = Utils.nextPoint(this.Inyagos[0].point, vector);
         for (let i = 0; i < this.Inyagos.length; i++) {
             const temp = this.Inyagos[i].point;
-            this.Inyagos[i].point = nextPoint;
+            this.Inyagos[i].SetPoint(nextPoint);
             nextPoint = temp;
         }
         if (hitEsa) {

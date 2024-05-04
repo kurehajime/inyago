@@ -5,15 +5,20 @@ import { Vector } from "./Vector";
 
 export class Inyago {
     static create(point: Point): Inyago {
-        return new Inyago(point, { x: point.x * CELL_WIDTH, y: point.y * CELL_WIDTH }, { x: 0, y: 0 });
+        return new Inyago(point, { x: point.x * CELL_WIDTH, y: point.y * CELL_WIDTH }, { x: 0, y: 0 }, point);
     }
 
-    constructor(public point: Point, public position: Position, public vector: Vector) {
+    constructor(public point: Point, public position: Position, public vector: Vector, public prevPoint: Point) {
     }
 
     public Clone(): Inyago {
-        const clone = new Inyago(this.point, this.position, this.vector);
+        const clone = new Inyago(this.point, this.position, this.vector, this.prevPoint);
         return clone;
+    }
+
+    public SetPoint(point: Point) {
+        this.prevPoint = this.point;
+        this.point = point;
     }
 
     public Move(rateprogress: number) {
@@ -39,8 +44,15 @@ export class Inyago {
 
     calcVector(): Vector {
         return {
-            x: Math.sign(this.To().x - this.position.x),
-            y: Math.sign(this.To().y - this.position.y),
+            x: Math.sign(this.To().x - this.From().x),
+            y: Math.sign(this.To().y - this.From().y),
+        };
+    }
+
+    public From(): Position {
+        return {
+            x: this.prevPoint.x * CELL_WIDTH,
+            y: this.prevPoint.y * CELL_WIDTH,
         };
     }
 
