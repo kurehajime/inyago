@@ -146,6 +146,18 @@ export default function FieldElement(props: Props) {
                     <text
                         className="hint"
                         x={CELL_WIDTH * 8}
+                        y={CELL_WIDTH * 7}
+                        width={FIELD_WIDTH}
+                        textAnchor="middle"
+                        fontWeight={"bold"}
+                        fontSize="25"
+                        fontFamily="Impact"
+                        fill={"black"}>
+                        上下左右に移動して
+                    </text>
+                    <text
+                        className="hint"
+                        x={CELL_WIDTH * 8}
                         y={CELL_WIDTH * 8}
                         width={FIELD_WIDTH}
                         textAnchor="start"
