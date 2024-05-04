@@ -133,15 +133,27 @@ export default function FieldElement(props: Props) {
                     />
                     <text
                         className="hint"
-                        x={CELL_WIDTH * 8}
-                        y={CELL_WIDTH * 11}
+                        x={CELL_WIDTH * 7}
+                        y={CELL_WIDTH * 8}
                         width={FIELD_WIDTH}
-                        textAnchor="middle"
+                        textAnchor="end"
                         fontWeight={"bold"}
                         fontSize="25"
                         fontFamily="Impact"
                         fill={"black"}>
-                        餌を食べて「いにゃご」を増やそう
+                        餌を食べて
+                    </text>
+                    <text
+                        className="hint"
+                        x={CELL_WIDTH * 8}
+                        y={CELL_WIDTH * 8}
+                        width={FIELD_WIDTH}
+                        textAnchor="start"
+                        fontWeight={"bold"}
+                        fontSize="25"
+                        fontFamily="Impact"
+                        fill={"black"}>
+                        を増やそう
                     </text>
                 </> : null
             }
