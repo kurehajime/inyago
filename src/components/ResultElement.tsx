@@ -33,12 +33,12 @@ export default function ResultElement(props: Props) {
         <>
             <defs>
                 <linearGradient id="rainbow" x1="0" x2="100%" y1="0" y2="0" gradientUnits="userSpaceOnUse" >
-                    <stop stop-color="#e60000" offset="0%" />
-                    <stop stop-color="#f39800" offset="20%" />
-                    <stop stop-color="#fff100" offset="40%" />
-                    <stop stop-color="#009944" offset="60%" />
-                    <stop stop-color="#0068b7" offset="80%" />
-                    <stop stop-color="#920783" offset="100%" />
+                    <stop stopColor="#e60000" offset="0%" />
+                    <stop stopColor="#f39800" offset="20%" />
+                    <stop stopColor="#fff100" offset="40%" />
+                    <stop stopColor="#009944" offset="60%" />
+                    <stop stopColor="#0068b7" offset="80%" />
+                    <stop stopColor="#920783" offset="100%" />
                 </linearGradient>
             </defs>
             <text

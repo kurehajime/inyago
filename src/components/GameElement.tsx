@@ -11,6 +11,7 @@ import './GameElement.css'
 import ResultElement from "./ResultElement";
 import TitleElement from "./TitleElement";
 import React from "react";
+import { Scale } from "../models/Scale";
 
 export default function GameElement() {
     const ref = React.useRef<SVGSVGElement>(null)
@@ -29,6 +30,18 @@ export default function GameElement() {
     const gamePlay = (level: number) => {
         setSelectLevel(level);
         setGameState(gameState.play(level));
+    }
+
+    const getScale = (): Scale => {
+        if (ref.current === null) {
+            return { x: 1, y: 1 };
+        }
+        const svg = ref.current;
+        const rect = ref.current.getBoundingClientRect();
+        return {
+            x: svg.viewBox.baseVal.width / rect.width,
+            y: svg.viewBox.baseVal.height / rect.height
+        };
     }
 
     useEffect(() => {
@@ -184,6 +197,7 @@ export default function GameElement() {
                         setSelectLevel(3)
                     }
                 }}
+                scale={getScale()}
             />
         </svg>
     )

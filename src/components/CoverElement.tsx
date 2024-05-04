@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Arrow, ButtonType, CELL_WIDTH, FIELD_WIDTH, State } from "../etc/Const";
+import { Scale } from "../models/Scale";
 
 type Props = {
     touched: (arrow: Arrow) => void;
@@ -8,6 +9,7 @@ type Props = {
     turned: boolean;
     arrow: Arrow;
     state: State;
+    scale: Scale;
 }
 export default function CoverElement(props: Props) {
     const ref = React.useRef<SVGRectElement>(null)
@@ -28,9 +30,9 @@ export default function CoverElement(props: Props) {
 
     const touchStart = (event: Event) => {
         const e = event as PointerEvent
-        const rect = (e.target as SVGSVGElement).getBoundingClientRect()
-        const x = (e.clientX - window.pageXOffset - rect.left)
-        const y = (e.clientY - window.pageYOffset - rect.top)
+        const rect = (e.currentTarget as SVGRectElement).getBoundingClientRect();
+        const x = (e.clientX - rect.left) * props.scale.x;
+        const y = (e.clientY - rect.top) * props.scale.y;
         resetXY(x, y)
         setMouseX(x)
         setMouseY(y)
@@ -52,9 +54,9 @@ export default function CoverElement(props: Props) {
 
     const touchMove = (event: Event) => {
         const e = event as PointerEvent
-        const rect = (e.target as SVGSVGElement).getBoundingClientRect()
-        const x = (e.clientX - window.pageXOffset - rect.left)
-        const y = (e.clientY - window.pageYOffset - rect.top)
+        const rect = (e.currentTarget as SVGRectElement).getBoundingClientRect();
+        const x = (e.clientX - rect.left) * props.scale.x;
+        const y = (e.clientY - rect.top) * props.scale.y;
         setMouseX(x)
         setMouseY(y)
         if (touched) {
