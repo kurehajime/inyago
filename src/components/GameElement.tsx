@@ -142,6 +142,7 @@ export default function GameElement() {
                 time={time}
                 holes={gameState.Holes}
                 level={gameState.Level}
+                allow={gameState.Arrow}
             />
             {
                 gameState.State === "result" &&

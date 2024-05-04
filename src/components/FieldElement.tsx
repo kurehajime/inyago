@@ -1,4 +1,4 @@
-import { CELL_WIDTH, FIELD_SIZE, State } from "../etc/Const";
+import { Arrow, CELL_WIDTH, FIELD_SIZE, FIELD_WIDTH, State } from "../etc/Const";
 import { Inyago } from "../models/Inyago";
 import { Position } from "../models/Position";
 import EsaElement from "./EsaElement";
@@ -7,6 +7,8 @@ import { Point } from "../models/Point";
 import HoleElement from "./HoleElement";
 import { Esa } from "../models/Esa";
 import ScoreElement from "./ScoreElement";
+import hint from '../assets/hint.png'
+import './FieldElement.css'
 type Props = {
     inyagos: Inyago[];
     esas: Esa[];
@@ -14,6 +16,7 @@ type Props = {
     time: number;
     holes: Point[];
     level: number;
+    allow: Arrow;
 }
 
 export default function FieldElement(props: Props) {
@@ -117,6 +120,30 @@ export default function FieldElement(props: Props) {
                     fontFamily="Impact"
                     fill={"white"}
                 >{mission}</text> : null
+            }
+            {
+                props.state === "playing" && props.allow === "" ? <>
+                    <image
+                        className="hint"
+                        x={0}
+                        y={0}
+                        width={FIELD_WIDTH}
+                        height={FIELD_WIDTH}
+                        href={hint}
+                    />
+                    <text
+                        className="hint"
+                        x={CELL_WIDTH * 8}
+                        y={CELL_WIDTH * 11}
+                        width={FIELD_WIDTH}
+                        textAnchor="middle"
+                        fontWeight={"bold"}
+                        fontSize="25"
+                        fontFamily="Impact"
+                        fill={"black"}>
+                        餌を食べて「いにゃご」を増やそう
+                    </text>
+                </> : null
             }
             <ScoreElement score={props.inyagos.length} />
         </>

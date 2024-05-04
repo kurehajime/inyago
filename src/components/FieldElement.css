@@ -1,0 +1,18 @@
+.hint {
+    animation: hintopa 3s both alternate;
+    filter: drop-shadow(0 0 15px rgb(255, 255, 255));
+}
+
+@keyframes hintopa {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
