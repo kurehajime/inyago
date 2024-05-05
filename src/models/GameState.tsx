@@ -53,20 +53,41 @@ export class GameState {
         return clone;
     }
 
-    public play(level: number): GameState {
+    public SetArrow(arrow: Arrow): GameState {
+        const clone = this.Clone();
+        if (clone.Inyagos.length > 1) {
+            const head = clone.Inyagos[0];
+            const nowArrow = head.CalcArrow();
+            if (
+                (nowArrow === "ArrowDown" && arrow === "ArrowUp") ||
+                (nowArrow === "ArrowUp" && arrow === "ArrowDown") ||
+                (nowArrow === "ArrowLeft" && arrow === "ArrowRight") ||
+                (nowArrow === "ArrowRight" && arrow === "ArrowLeft") ||
+                arrow === ""
+            ) {
+                // 明確に自滅するような逆走は無視
+                return clone;
+            }
+        }
+        clone.Arrow = arrow;
+
+        return clone;
+    }
+
+    public Play(level: number): GameState {
         const clone = this.Clone();
         clone.State = "playing";
         clone.Level = level;
         return clone;
     }
 
-    public showResult(): GameState {
+    public ShowResult(): GameState {
         const clone = this.Clone();
         clone.State = "result";
         return clone;
     }
 
-    public clear(): boolean {
+    public Clear(): boolean {
         switch (this.Level) {
             case 1:
                 return this.Inyagos.length >= 30;
@@ -92,12 +113,12 @@ export class GameState {
             nextPoint = temp;
         }
         if (hitEsa) {
-            this.Inyagos.push(Inyago.create(nextPoint));
+            this.Inyagos.push(Inyago.Create(nextPoint));
             if (hitEsa === "special") {
-                this.Inyagos.push(Inyago.create(nextPoint));
-                this.Inyagos.push(Inyago.create(nextPoint));
+                this.Inyagos.push(Inyago.Create(nextPoint));
+                this.Inyagos.push(Inyago.Create(nextPoint));
             }
-            if (this.clear()) {
+            if (this.Clear()) {
                 this.State = "gameover";
                 return;
             }

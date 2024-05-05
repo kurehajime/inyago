@@ -29,7 +29,7 @@ export default function GameElement() {
 
     const gamePlay = (level: number) => {
         setSelectLevel(level);
-        setGameState(gameState.play(level));
+        setGameState(gameState.Play(level));
     }
 
     const getScale = (): Scale => {
@@ -52,7 +52,7 @@ export default function GameElement() {
     useEffect(() => {
         if (gameState.State === "gameover") {
             setTimeout(() => {
-                setGameState(gameState.showResult());
+                setGameState(gameState.ShowResult());
             }, 700);
         }
     }, [gameState.State]);
@@ -76,20 +76,7 @@ export default function GameElement() {
             return;
         }
         if (gameState.Arrow !== e.key) {
-            const nextGameState = gameState.Clone();
-            if (gameState.Inyagos.length > 1) {
-                if (
-                    (nextGameState.Arrow === "ArrowDown" && e.key === "ArrowUp") ||
-                    (nextGameState.Arrow === "ArrowUp" && e.key === "ArrowDown") ||
-                    (nextGameState.Arrow === "ArrowLeft" && e.key === "ArrowRight") ||
-                    (nextGameState.Arrow === "ArrowRight" && e.key === "ArrowLeft")
-                ) {
-                    // 明確に自滅するような逆走は無視
-                    return;
-                }
-            }
-            nextGameState.Arrow = e.key as Arrow;
-            setGameState(nextGameState);
+            setGameState(gameState.SetArrow(e.key as Arrow));
         }
         e.preventDefault();
     }, {
@@ -107,7 +94,7 @@ export default function GameElement() {
 
     let effect = "nomal";
     if (gameState.State === "gameover" || gameState.State === "result") {
-        if (gameState.clear()) {
+        if (gameState.Clear()) {
             effect = "clear";
         } else if (gameState.Level === 3 && gameState.Inyagos.length >= 30) {
             effect = "clear";
@@ -148,7 +135,7 @@ export default function GameElement() {
                 gameState.State === "result" &&
                 <ResultElement
                     score={gameState.Inyagos.length}
-                    clear={gameState.clear()}
+                    clear={gameState.Clear()}
                     level={gameState.Level}
                 />
             }
@@ -160,9 +147,7 @@ export default function GameElement() {
             }
             <CoverElement
                 touched={function (arrow: Arrow) {
-                    const nextGameState = gameState.Clone();
-                    nextGameState.Arrow = arrow;
-                    setGameState(nextGameState);
+                    setGameState(gameState.SetArrow(arrow));
                 }}
                 gameStart={function (buttonType: ButtonType) {
                     if (gameState.State === "result" && buttonType === "OK") {

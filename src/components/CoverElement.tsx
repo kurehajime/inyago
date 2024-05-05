@@ -88,13 +88,8 @@ export default function CoverElement(props: Props) {
         }
 
         if (
-            arrow === "" ||
-            (props.arrow === "ArrowDown" && arrow === "ArrowUp") ||
-            (props.arrow === "ArrowUp" && arrow === "ArrowDown") ||
-            (props.arrow === "ArrowLeft" && arrow === "ArrowRight") ||
-            (props.arrow === "ArrowRight" && arrow === "ArrowLeft")
+            arrow === ""
         ) {
-            // 明確に自滅するような逆走は無視
             return;
         }
         resetXY(x, y)

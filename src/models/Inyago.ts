@@ -1,14 +1,15 @@
-import { CELL_WIDTH } from "../etc/Const";
+import { Arrow, CELL_WIDTH } from "../etc/Const";
 import { Point } from "./Point";
 import { Position } from "./Position";
 import { Vector } from "./Vector";
 
 export class Inyago {
-    static create(point: Point): Inyago {
-        return new Inyago(point, { x: point.x * CELL_WIDTH, y: point.y * CELL_WIDTH }, { x: 0, y: 0 }, point);
-    }
 
     constructor(public point: Point, public position: Position, public vector: Vector, public prevPoint: Point) {
+    }
+
+    public static Create(point: Point): Inyago {
+        return new Inyago(point, { x: point.x * CELL_WIDTH, y: point.y * CELL_WIDTH }, { x: 0, y: 0 }, point);
     }
 
     public Clone(): Inyago {
@@ -42,11 +43,21 @@ export class Inyago {
         }
     }
 
-    calcVector(): Vector {
-        return {
-            x: Math.sign(this.To().x - this.From().x),
-            y: Math.sign(this.To().y - this.From().y),
-        };
+    CalcArrow(): Arrow {
+        const vector = this.calcVector();
+        if (vector.x === 1) {
+            return "ArrowRight";
+        }
+        if (vector.x === -1) {
+            return "ArrowLeft";
+        }
+        if (vector.y === 1) {
+            return "ArrowDown";
+        }
+        if (vector.y === -1) {
+            return "ArrowUp";
+        }
+        return ""
     }
 
     public From(): Position {
@@ -60,6 +71,13 @@ export class Inyago {
         return {
             x: this.point.x * CELL_WIDTH,
             y: this.point.y * CELL_WIDTH,
+        };
+    }
+
+    private calcVector(): Vector {
+        return {
+            x: Math.sign(this.To().x - this.From().x),
+            y: Math.sign(this.To().y - this.From().y),
         };
     }
 }

@@ -13,7 +13,7 @@ export class Utils {
 
     public static createInyagos(): Inyago[] {
         const inyagos: Inyago[] = [];
-        inyagos.push(Inyago.create({ x: Math.floor(FIELD_SIZE / 2), y: Math.floor(FIELD_SIZE / 2) }));
+        inyagos.push(Inyago.Create({ x: Math.floor(FIELD_SIZE / 2), y: Math.floor(FIELD_SIZE / 2) }));
         return inyagos;
     }
 
