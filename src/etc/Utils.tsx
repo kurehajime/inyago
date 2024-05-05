@@ -2,7 +2,7 @@ import { Esa } from "../models/Esa";
 import { Inyago } from "../models/Inyago";
 import { Point } from "../models/Point";
 import { Vector } from "../models/Vector";
-import { Arrow, EsaType, FIELD_SIZE } from "./Const";
+import { Arrow, ButtonType, CELL_WIDTH, EsaType, FIELD_SIZE, State } from "./Const";
 
 export class Utils {
     public static isGameOver(inyagos: Inyago[], holes: Point[]): boolean {
@@ -78,6 +78,43 @@ export class Utils {
             }
         }
         return null;
+    }
+
+    public static hitTest(x: number, y: number, state: State): ButtonType {
+        const buttonWidth = CELL_WIDTH * 3
+        const buttonHeight = CELL_WIDTH * 3
+        const buttonY = CELL_WIDTH * 9
+        const buttonX1 = CELL_WIDTH * 2
+        const buttonX2 = CELL_WIDTH * 6
+        const buttonX3 = CELL_WIDTH * 10
+
+        const okX = CELL_WIDTH * 4
+        const okY = CELL_WIDTH * 10
+        const okWidth = CELL_WIDTH * 7
+        const okHeight = CELL_WIDTH * 2
+
+        if (state === "start") {
+            if (buttonY <= y && y <= buttonY + buttonHeight) {
+                if (buttonX1 <= x && x <= buttonX1 + buttonWidth) {
+                    return "1"
+                }
+                if (buttonX2 <= x && x <= buttonX2 + buttonWidth) {
+                    return "2"
+                }
+                if (buttonX3 <= x && x <= buttonX3 + buttonWidth) {
+                    return "3"
+                }
+            }
+        }
+        if (state === "result") {
+            if (okY <= y && y <= okY + okHeight) {
+                if (okX <= x && x <= okX + okWidth) {
+                    return "OK"
+                }
+            }
+        }
+
+        return "Other"
     }
 
     private static isSpecialEsa(esaPoint: Point, holes: Point[]): boolean {
