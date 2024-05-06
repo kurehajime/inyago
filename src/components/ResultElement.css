@@ -1,6 +1,5 @@
 .result_text {
     animation: opa 3s infinite alternate;
-    filter: drop-shadow(0 0 15px rgb(0, 0, 0, 0.3));
 }
 
 @keyframes opa {

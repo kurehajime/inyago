@@ -32,7 +32,7 @@ export default function ResultElement(props: Props) {
     return (
         <>
             <defs>
-                <linearGradient id="rainbow" x1="0" x2="100%" y1="0" y2="0" gradientUnits="userSpaceOnUse" >
+                <linearGradient id="rainbow" x1="20%" x2="20%" y1="20%" y2="80%" gradientUnits="userSpaceOnUse" >
                     <stop stopColor="#e60000" offset="0%" />
                     <stop stopColor="#f39800" offset="20%" />
                     <stop stopColor="#fff100" offset="40%" />
@@ -51,6 +51,8 @@ export default function ResultElement(props: Props) {
                 fontFamily="Impact"
                 fill={color}
                 opacity={0.8}
+                stroke='white'
+                strokeWidth={1}
             >{message}</text>
             <text
                 className="result_text"
@@ -61,7 +63,9 @@ export default function ResultElement(props: Props) {
                 fontSize="200"
                 fontFamily="Impact"
                 fill={color}
-                opacity={0.8}
+                stroke='white'
+                strokeWidth={5}
+                opacity={0.5}
             >{(props.score.toString()).padStart(3, "0")}</text>
 
             <rect
@@ -72,7 +76,7 @@ export default function ResultElement(props: Props) {
                 fill={"white"}
                 stroke={color}
                 strokeWidth={5}
-                opacity={0.9}
+                opacity={0.8}
             ></rect>
             <text
                 x={CELL_WIDTH * (FIELD_SIZE / 2)}
@@ -82,6 +86,8 @@ export default function ResultElement(props: Props) {
                 fontSize="80"
                 fontFamily="Impact"
                 fill={color}
+                stroke='white'
+                strokeWidth={1}
             >{"OK"}</text >
         </>
     )
