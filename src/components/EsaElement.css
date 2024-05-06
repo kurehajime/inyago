@@ -1,8 +1,8 @@
 .special {
-    animation: huerotator 1s infinite alternate;
+    animation: esa 1s infinite alternate;
 }
 
-@keyframes huerotator {
+@keyframes esa {
     0% {
         filter: hue-rotate(0deg);
     }
