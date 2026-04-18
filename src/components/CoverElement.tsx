@@ -98,13 +98,15 @@ export default function CoverElement(props: Props) {
     }
 
     useEffect(() => {
-        ref.current?.addEventListener("pointerdown", touchStart)
-        ref.current?.addEventListener("pointerup", touchEnd)
-        ref.current?.addEventListener("pointermove", touchMove)
+        const element = ref.current
+
+        element?.addEventListener("pointerdown", touchStart)
+        element?.addEventListener("pointerup", touchEnd)
+        element?.addEventListener("pointermove", touchMove)
         return () => {
-            ref.current?.removeEventListener("pointerdown", touchStart)
-            ref.current?.removeEventListener("pointerup", touchEnd)
-            ref.current?.removeEventListener("pointermove", touchMove)
+            element?.removeEventListener("pointerdown", touchStart)
+            element?.removeEventListener("pointerup", touchEnd)
+            element?.removeEventListener("pointermove", touchMove)
         }
     },)
 
