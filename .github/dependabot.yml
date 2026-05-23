@@ -11,7 +11,7 @@ updates:
     patterns: ["*"]
     multi-ecosystem-group: "dependency-updates"
     cooldown:
-      default-days: 2
+      default-days: 7
     groups:
       all-npm-security-updates:
         applies-to: "security-updates"
